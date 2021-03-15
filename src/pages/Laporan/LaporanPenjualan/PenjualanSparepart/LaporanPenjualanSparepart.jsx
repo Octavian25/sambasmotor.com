@@ -9,6 +9,7 @@ import {
 } from "../../../../components/panel/panel";
 import CetakPenjualanSparepart from "./CetakPenjualanSparepart";
 import HeadLaporanPenjualanSparepart from "./HeadLaporanPenjualanSparepart";
+import TabelLaporanPenjualanSparepart from "./TabelLaporanPenjualanSparepart";
 
 class LaporanPenjualanSparepart extends Component {
   constructor(props) {
@@ -61,6 +62,11 @@ class LaporanPenjualanSparepart extends Component {
             <HeadLaporanPenjualanSparepart
               onSubmit={(data) => this.getLaporan(data)}
             />
+          </PanelBody>
+        </Panel>
+        <Panel>
+          <PanelBody>
+            <TabelLaporanPenjualanSparepart />
           </PanelBody>
         </Panel>
       </div>

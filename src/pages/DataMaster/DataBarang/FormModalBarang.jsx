@@ -20,9 +20,9 @@ const maptostate = (state) => {
         kode_barang: state.datamaster.databarang.kode_barang,
         kode_barcode: state.datamaster.databarang.kode_barcode,
         nama_barang: state.datamaster.databarang.nama_barang,
-        merk: state.datamaster.databarang.kode_merk_barang,
-        ukuran: state.datamaster.databarang.kode_ukuran,
-        kwalitas: state.datamaster.databarang.kode_kwalitas,
+        // merk: state.datamaster.databarang.kode_merk_barang,
+        // ukuran: state.datamaster.databarang.kode_ukuran,
+        // kwalitas: state.datamaster.databarang.kode_kwalitas,
         type: state.datamaster.databarang.type,
         rak: state.datamaster.databarang.kode_lokasi_rak,
         selving: state.datamaster.databarang.kode_lokasi_selving,
@@ -49,9 +49,9 @@ class FormModalBarang extends Component {
     this.state = {
       listJenis: [],
       listKategori: [],
-      listMerk: [],
-      listUkuran: [],
-      listKwalitas: [],
+      // listMerk: [],
+      // listUkuran: [],
+      // listKwalitas: [],
       listRak: [],
       listSelving: [],
       listSatuan: [],
@@ -79,33 +79,33 @@ class FormModalBarang extends Component {
       .catch(() =>
         NotifError("Sepertinya ada gangguan, coba check koneksi anda")
       );
-    AxiosMasterGet("merk-barang/get/all")
-      .then((res) =>
-        this.setState({
-          listMerk: res.data,
-        })
-      )
-      .catch(() =>
-        NotifError("Sepertinya ada gangguan, coba check koneksi anda")
-      );
-    AxiosMasterGet("ukuran/get/all")
-      .then((res) =>
-        this.setState({
-          listUkuran: res.data,
-        })
-      )
-      .catch(() =>
-        NotifError("Sepertinya ada gangguan, coba check koneksi anda")
-      );
-    AxiosMasterGet("kwalitas/get/all")
-      .then((res) =>
-        this.setState({
-          listKwalitas: res.data,
-        })
-      )
-      .catch(() =>
-        NotifError("Sepertinya ada gangguan, coba check koneksi anda")
-      );
+    // AxiosMasterGet("merk-barang/get/all")
+    //   .then((res) =>
+    //     this.setState({
+    //       listMerk: res.data,
+    //     })
+    //   )
+    //   .catch(() =>
+    //     NotifError("Sepertinya ada gangguan, coba check koneksi anda")
+    //   );
+    // AxiosMasterGet("ukuran/get/all")
+    //   .then((res) =>
+    //     this.setState({
+    //       listUkuran: res.data,
+    //     })
+    //   )
+    //   .catch(() =>
+    //     NotifError("Sepertinya ada gangguan, coba check koneksi anda")
+    //   );
+    // AxiosMasterGet("kwalitas/get/all")
+    //   .then((res) =>
+    //     this.setState({
+    //       listKwalitas: res.data,
+    //     })
+    //   )
+    //   .catch(() =>
+    //     NotifError("Sepertinya ada gangguan, coba check koneksi anda")
+    //   );
     AxiosMasterGet("lokasi-rak/get/all")
       .then((res) =>
         this.setState({
@@ -253,17 +253,11 @@ class FormModalBarang extends Component {
               validate={required}
             />
           </div>
-          <div className="col-lg-6">
+          {/* <div className="col-lg-6">
             <Field
               name="merk"
-              component={ReanderSelect}
-              options={this.state.listMerk.map((list) => {
-                let data = {
-                  value: list.kode_merk_barang,
-                  name: list.nama_merk_barang,
-                };
-                return data;
-              })}
+              component={ReanderField}
+              type="text"
               label="Merk Barang"
               placeholder="Masukan Merk"
             />
@@ -271,14 +265,8 @@ class FormModalBarang extends Component {
           <div className="col-lg-6">
             <Field
               name="ukuran"
-              component={ReanderSelect}
-              options={this.state.listUkuran.map((list) => {
-                let data = {
-                  value: list.kode_ukuran,
-                  name: list.nama_ukuran,
-                };
-                return data;
-              })}
+              component={ReanderField}
+              type="text"
               label="Ukuran"
               placeholder="Masukan Ukuran"
             />
@@ -286,17 +274,14 @@ class FormModalBarang extends Component {
           <div className="col-lg-6">
             <Field
               name="kwalitas"
-              component={ReanderSelect}
-              options={this.state.listKwalitas.map((list) => {
-                let data = {
-                  value: list.kode_kwalitas,
-                  name: list.nama_kwalitas,
-                };
-                return data;
-              })}
+              component={ReanderField}
+              type="text"
               label="Kualitas"
               placeholder="Masukan Kualitas"
             />
+          </div> */}
+          <div className="col-lg-12">
+            <p>Contoh Nama Barang : ACCU KERING 12 V /40 A YUASA</p>
           </div>
           <div className="col-lg-6">
             <Field

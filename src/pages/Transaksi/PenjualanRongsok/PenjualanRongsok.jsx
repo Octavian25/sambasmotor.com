@@ -135,7 +135,7 @@ class PenjualanRongsok extends Component {
         kode_satuan: hasil.satuan,
         harga_satuan: parseFloat(hasil.harga_satuan),
         harga_total:
-          parseFloat(hasil.total) + parseFloat(local[filtered].harga_total),
+        (parseInt(hasil.qty)+ parseFloat(local[filtered].qty)) * parseFloat(hasil.harga_satuan),
       };
       local.splice(filtered, 1);
       local.push(data);

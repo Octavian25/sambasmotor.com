@@ -87,16 +87,36 @@ class MasterCustomer extends React.Component {
               nomesin_kendaraan: row.nomesin_kendaraan,
               warna_kendaraan: row.warna_kendaraan,
             };
+            let dataTambah = {
+              kode_customer: row.kode_customer,
+              nama_customer: row.nama_customer,
+              alamat: row.alamat,
+              kota: row.kota,
+              handphone: row.handphone,
+              nopol_kendaraan: row.nopol_kendaraan,
+              merk_kendaraan: row.merk_kendaraan,
+              type_kendaraan: row.type_kendaraan,
+              nomesin_kendaraan: row.nomesin_kendaraan,
+              warna_kendaraan: row.warna_kendaraan,
+            };
             this.setState({});
             return (
               <div className="row text-center">
-                <div className="col-12">
+                <div className="col-4">
                   <button
                     onClick={() => this.editModal(dataEdit)}
                     className="btn btn-warning mr-3"
                   >
-                    Edit
-                    <i className="fa fa-edit ml-2"></i>
+                    <i className="fa fa-edit"></i>
+                  </button>
+                </div>
+                <div className="col-8">
+                  <button
+                    onClick={() => this.tambahkendaraanmodal(dataTambah)}
+                    className="btn btn-success mr-3"
+                  >
+                    <i className="fa fa-car"></i>
+                    <i className="fa fa-plus"></i>
                   </button>
                 </div>
               </div>
@@ -127,6 +147,13 @@ class MasterCustomer extends React.Component {
   editModal(data) {
     this.props.dispatch(showModal());
     this.props.dispatch(editCustomer(data));
+    this.setState({
+      isEdit: true,
+    });
+  }
+  tambahkendaraanmodal(tambah) {
+    this.props.dispatch(showModal());
+    this.props.dispatch(editCustomer(tambah));
     this.setState({
       isEdit: true,
     });
@@ -162,6 +189,7 @@ class MasterCustomer extends React.Component {
       nomesin_kendaraan: hasil.no_mesin || "-",
       warna_kendaraan: hasil.warna || "-",
     };
+
     this.state.isEdit
       ? AxiosMasterPut(
           this.props.dispatch,

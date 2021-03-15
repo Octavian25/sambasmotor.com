@@ -7,8 +7,8 @@ export const GET_KONVERSI_BARANG_TEMP = "GET_KONVERSI_BARANG_TEMP";
 export const GET_PENGELUARAN_BARANG_TEMP = "GET_PENGELUARAN_BARANG_TEMP";
 export const GET_TAMBAH_STOCK_TEMP = "GET_TAMBAH_STOCK_TEMP";
 export const GET_LIST_PENGELUARAN_BARANG = "GET_LIST_PENGELUARAN_BARANG";
-export const GET_PENGELUARAN_BARANG_SELECTED =
-  "GET_PENGELUARAN_BARANG_SELECTED";
+export const GET_PENGELUARAN_BARANG_SELECTED = "GET_PENGELUARAN_BARANG_SELECTED";
+export const GET_RETUR_BARANG_TIDAK_JADI_JUAL_TEMP ="GET_RETUR_BARANG_TIDAK_JADI_JUAL_TEMPGET";
 
 // Modal
 export const getPermintaanTemp = () => {
@@ -103,6 +103,17 @@ export const getPengeluaranBarangSelected = () => {
   return (dispatch) => {
     dispatch({
       type: GET_PENGELUARAN_BARANG_SELECTED,
+      payload: {
+        data: data,
+      },
+    });
+  };
+};
+export const getReturBarangTidakJadi = () => {
+  let data = JSON.parse(localStorage.getItem("ReturBarang_temp")) || [];
+  return(dispatch) => {
+    dispatch({
+      type: GET_RETUR_BARANG_TIDAK_JADI_JUAL_TEMP,
       payload: {
         data: data,
       },

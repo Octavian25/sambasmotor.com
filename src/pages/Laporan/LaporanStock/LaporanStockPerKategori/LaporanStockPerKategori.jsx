@@ -13,6 +13,7 @@ import {
 } from "../../../../components/panel/panel";
 import CetakKartuStock from "../LaporanKartuStock/CetakKartuStock";
 import HeadLaporanStockPerKategori from "./HeadLaporanStockPerKategori";
+import TabelLaporanKartuStock from "./TabelLaporanKartuStock";
 
 class LaporanStockPerKategori extends Component {
   constructor(props) {
@@ -65,6 +66,11 @@ class LaporanStockPerKategori extends Component {
             <HeadLaporanStockPerKategori
               onSubmit={(data) => this.getLaporan(data)}
             />
+          </PanelBody>
+        </Panel>
+        <Panel>
+          <PanelBody>
+            <TabelLaporanKartuStock/>
           </PanelBody>
         </Panel>
       </div>

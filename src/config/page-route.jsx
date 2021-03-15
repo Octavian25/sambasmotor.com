@@ -1,10 +1,11 @@
 import React, { lazy } from "react";
 import LaporanKartuHutangSupplier from "../pages/Laporan/LaporanSupplier/KartuHutangSupplier/LaporanKartuHutangSupplier.jsx";
+import ReturBarangTidakJadiPakai from "../pages/Stoking/ReturBarangTidakJadiPakai/ReturBarangTidakJadiPakai.jsx";
 import TambahStockBarang from "../pages/Stoking/TambahStockBarang/TambahStockBarang.jsx";
 import ProgressService from "../pages/Transaksi/ProgressService/ProgressService.jsx";
-const MasterUkuran = lazy(() =>
-  import("../pages/DataMaster/DataUkurann/MasterUkuran.jsx")
-);
+// const MasterUkuran = lazy(() =>
+//   import("../pages/DataMaster/DataUkurann/MasterUkuran.jsx")
+// );
 const MasterWarna = lazy(() =>
   import("../pages/DataMaster/DataWarna/MasterWarna.jsx")
 );
@@ -86,9 +87,9 @@ const LaporanReturnSupplier = lazy(() =>
     "../pages/Laporan/LaporanSupplier/ReturnSupplier/LaporanReturnSupplier.jsx"
   )
 );
-const MasterMerkBarang = lazy(() =>
-  import("../pages/DataMaster/DataMerkBarang/MasterMerkBarang.jsx")
-);
+// const MasterMerkBarang = lazy(() =>
+//   import("../pages/DataMaster/DataMerkBarang/MasterMerkBarang.jsx")
+// );
 const MasterGudang = lazy(() =>
   import("../pages/DataMaster/DataGudang/MasterGudang.jsx")
 );
@@ -101,9 +102,9 @@ const MasterKendaraan = lazy(() =>
 const MasterKunci = lazy(() =>
   import("../pages/DataMaster/DataKunci/MasterKunci.jsx")
 );
-const MasterKwalitas = lazy(() =>
-  import("../pages/DataMaster/DataKwalitas/MasterKwalitas.jsx")
-);
+// const MasterKwalitas = lazy(() =>
+//   import("../pages/DataMaster/DataKwalitas/MasterKwalitas.jsx")
+// );
 const MasterRak = lazy(() =>
   import("../pages/DataMaster/DataRak/MasterRak.jsx")
 );
@@ -148,6 +149,9 @@ const MasterCustomer = lazy(() =>
 );
 const MasterSupplier = lazy(() =>
   import("../pages/DataMaster/DataSupplier/MasterSupplier.jsx")
+);
+const ReturBarang = lazy(() =>
+  import("../pages/Stoking/ReturBarangTidakJadiPakai/ReturBarangTidakJadiPakai.jsx")
 );
 const PermintaanBarang = lazy(() =>
   import("../pages/Stoking/PermintaanBarang/PermintaanBarang.jsx")
@@ -306,13 +310,14 @@ const routes = [
     title: "Master Kendaraan",
     component: () => <MasterKendaraan />,
   },
+  
   // Data Merek Barang
-  {
-    path: "/master-merk-barang",
-    exact: true,
-    title: "Master Barang",
-    component: () => <MasterMerkBarang />,
-  },
+  // {
+  //   path: "/master-merk-barang",
+  //   exact: true,
+  //   title: "Master Barang",
+  //   component: () => <MasterMerkBarang />,
+  // },
   // Data Gudang
   {
     path: "/master-gudang",
@@ -342,12 +347,12 @@ const routes = [
     component: () => <MasterSatuan />,
   },
   // Data Kwalitas
-  {
-    path: "/master-kualitas",
-    exact: true,
-    title: "Master Kualitas",
-    component: () => <MasterKwalitas />,
-  },
+  // {
+  //   path: "/master-kualitas",
+  //   exact: true,
+  //   title: "Master Kualitas",
+  //   component: () => <MasterKwalitas />,
+  // },
   // Data Jenis Kunci
   {
     path: "/master-jenis-kunci",
@@ -422,7 +427,7 @@ const routes = [
   {
     path: "/master-customer",
     exact: true,
-    title: "Master CUstomer",
+    title: "Master Customer",
     component: () => <MasterCustomer />,
   },
   // Data Supplier
@@ -445,6 +450,12 @@ const routes = [
     exact: true,
     title: "Stocking Pengeluaran",
     component: () => <PengeluaranBarang />,
+  },
+  {
+    path: "/stocking-returbarang",
+    exact: true,
+    title: "Stocking Retur Barang",
+    component: () => <ReturBarangTidakJadiPakai />,
   },
   // Stoking Konversi
   {
@@ -770,12 +781,12 @@ const routes = [
     title: "Master Warna",
     component: () => <MasterWarna />,
   },
-  {
-    path: "/master-ukuran",
-    exact: true,
-    title: "Master Ukuran",
-    component: () => <MasterUkuran />,
-  },
+  // {
+  //   path: "/master-ukuran",
+  //   exact: true,
+  //   title: "Master Ukuran",
+  //   component: () => <MasterUkuran />,
+  // },
 ];
 
 export default routes;

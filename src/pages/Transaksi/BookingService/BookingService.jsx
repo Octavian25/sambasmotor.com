@@ -102,7 +102,7 @@ class BookingService extends React.Component {
             <br />
             <ModalBookingService
               onSubmit={(data) => this.handleSubmit(data)}
-              listMerk={this.state.listMerk}
+              // listMerk={this.state.listMerk}
             />
             {/* End Tambah Master Kategori  */}
           </PanelBody>

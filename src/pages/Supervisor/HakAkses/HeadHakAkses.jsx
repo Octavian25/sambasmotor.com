@@ -103,6 +103,7 @@ const options = [
   { value: "/laporan-medical", label: "laporan-medical" },
   { value: "/master-warna", label: "master-warna" },
   { value: "/master-ukuran", label: "master-ukuran" },
+  { value: "/stocking-returbarang", label: "stocking-returbarang"},
 ];
 class HeadHakAkses extends Component {
   constructor(props) {

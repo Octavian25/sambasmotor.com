@@ -413,6 +413,26 @@ class ModalDaftarService extends Component {
                 </div>
                 <div className="col-lg-3">
                   <Field
+                    name="nopol_kendaraan"
+                    component={ReanderSelect}
+                    type="text"
+                    label="Nomor Polisi"
+                    placeholder="Masukan Nomor Polisi"
+                    options=
+                    {
+                      this.state.listCustomer
+                      .filter((fill) => fill.kode_customer === this.state.listCustomer)
+                      .map((list)=>{
+                        let data = {
+                          value: `${list.nopol_kendaraan}`,
+                          name: `${list.nopol_kendaraan}`
+                        };
+                        return data;
+                      })}
+                  />
+                </div>
+                <div className="col-lg-3">
+                  <Field
                     name="alamat"
                     component={ReanderField}
                     type="text"
@@ -451,17 +471,6 @@ class ModalDaftarService extends Component {
                     readOnly
                   />
                 </div>
-                <div className="col-lg-3">
-                  <Field
-                    name="nopol_kendaraan"
-                    component={ReanderField}
-                    type="text"
-                    label="Nomor Polisi"
-                    placeholder="Masukan Nomor Polisi"
-                    readOnly
-                  />
-                </div>
-
                 <div className="col-lg-3">
                   <Field
                     name="type_kendaraan"
@@ -505,44 +514,6 @@ class ModalDaftarService extends Component {
                   placeholder="Masukan KM Masuk"
                 />
               </div>
-              <div className="col-lg-3">
-                <Field
-                  name="service_selanjutnya"
-                  component={ReanderField}
-                  type="date"
-                  label="Jadwal Service Selanjutnya"
-                  placeholder="Masukan Jadwal Service Selanjutnya"
-                />
-              </div>
-
-              <div className="col-lg-3">
-                <Field
-                  name="tanggal_keluar"
-                  component={ReanderField}
-                  type="date"
-                  label="Tanggal Keluar"
-                  placeholder="Masukan Tanggal Keluar"
-                />
-              </div>
-              <div className="col-lg-3">
-                <Field
-                  name="km_keluar"
-                  component={ReanderField}
-                  type="number"
-                  label="KM Keluar"
-                  placeholder="Masukan KM Keluar"
-                />
-              </div>
-              <div className="col-lg-3">
-                <Field
-                  name="km_service_berikutnya"
-                  component={ReanderField}
-                  type="number"
-                  label="KM Service Berikutnya"
-                  placeholder="Masukan KM Service Berikutnya"
-                />
-              </div>
-
               <NavigationStepper
                 nextStep={() => this.nextStep(1)}
                 prevStep={() => this.prevStep(1)}
@@ -572,7 +543,7 @@ class ModalDaftarService extends Component {
                 />
               </div>
 
-              <div className="col-lg-6">
+              <div className="col-lg-3">
                 <Field
                   name="kode_mekanik"
                   component={ReanderSelect}
@@ -588,6 +559,42 @@ class ModalDaftarService extends Component {
                   type="text"
                   label="ID Mekanik"
                   placeholder="Masukan ID Mekanik"
+                />
+              </div>
+              <div className="col-lg-3">
+                <Field
+                  name="kode_kepala_montir"
+                  component={ReanderSelect}
+                  options={this.props.listsales
+                    .filter((fill) => fill.kode_divisi === "KPLMNTR")
+                    .map((list) => {
+                      let data = {
+                        value: `${list.kode_pegawai}`,
+                        name: `${list.kode_pegawai} - ${list.nama_pegawai}`,
+                      };
+                      return data;
+                    })}
+                  type="text"
+                  label="Penanggung Jawab Mekanik"
+                  placeholder="Masukan ID Mekanik"
+                />
+              </div>
+              <div className="col-lg-3">
+                <Field
+                  name="kode_helper"
+                  component={ReanderSelect}
+                  options={this.props.listsales
+                    .filter((fill) => fill.kode_divisi === "HP")
+                    .map((list) => {
+                      let data = {
+                        value: `${list.kode_pegawai}`,
+                        name: `${list.kode_pegawai} - ${list.nama_pegawai}`,
+                      };
+                      return data;
+                    })}
+                  type="text"
+                  label="Helper Mekanik"
+                  placeholder="Masukan Helper Mekanik"
                 />
               </div>
               <NavigationStepper

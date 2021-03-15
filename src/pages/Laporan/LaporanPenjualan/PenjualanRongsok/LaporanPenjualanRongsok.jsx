@@ -10,6 +10,7 @@ import {
 } from "../../../../components/panel/panel";
 import CetakPenjualanRongsok from "./CetakPenjualanRongsok";
 import HeadLaporanPenjualanRongsok from "./HeadLaporanPenjualanRongsok";
+import TabelLaporanPenjualanRongsok from "./TabelLaporanPenjualanRongsok";
 
 class LaporanPenjualanRongsok extends Component {
   constructor(props) {
@@ -63,6 +64,11 @@ class LaporanPenjualanRongsok extends Component {
             <HeadLaporanPenjualanRongsok
               onSubmit={(data) => this.getLaporan(data)}
             />
+          </PanelBody>
+        </Panel>
+        <Panel>
+          <PanelBody>
+            <TabelLaporanPenjualanRongsok/>
           </PanelBody>
         </Panel>
       </div>

@@ -9,6 +9,7 @@ import {
 } from "../../../../components/panel/panel";
 import CetakService from "./CetakService";
 import HeadLaporanService from "./HeadLaporanService";
+import TabeLaporanService from "./TabelLaporanService";
 
 class LaporanService extends Component {
   constructor(props) {
@@ -57,6 +58,11 @@ class LaporanService extends Component {
           <PanelHeader>Laporan Service</PanelHeader>
           <PanelBody>
             <HeadLaporanService onSubmit={(data) => this.getLaporan(data)} />
+          </PanelBody>
+        </Panel>
+        <Panel>
+          <PanelBody>
+            <TabeLaporanService/>
           </PanelBody>
         </Panel>
       </div>

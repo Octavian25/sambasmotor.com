@@ -11,7 +11,7 @@ const ValidasiDataUsers = (value) => {
         errors.level = "Level Harus Dipilih ";
     }
     if (!value.password) {
-        errors.password = "Hassword Harus Diisi ";
+        errors.password = "Password Harus Diisi ";
     }
     if (!value.retype_password) {
         errors.retype_password = "Retype Password Harus Diisi ";

@@ -92,7 +92,7 @@ class ModalBookingService extends Component {
               <div className="col-lg-2">
                 <label className="mb-4">Jenis Penjualan</label>
                 <div>
-                  <label>
+                  <label className="ml-3">
                     <Field
                       name="jenis_penjualan"
                       component="input"
@@ -118,7 +118,7 @@ class ModalBookingService extends Component {
                   </label>
                 </div>
               </div>
-              <div className="col-lg-2">
+              <div className="col-lg-3">
                 <Field
                   name="pelaggan"
                   component={ReanderSelect}
@@ -170,7 +170,7 @@ class ModalBookingService extends Component {
                   validate={required}
                 />
               </div>
-              <div className="col-lg-1">
+              <div className="col-lg-2">
                 <Field
                   name="jam"
                   component={ReanderField}
@@ -179,6 +179,7 @@ class ModalBookingService extends Component {
                   placeholder="Masukan Jam"
                 />
               </div>
+              <div className="col-lg-2"></div>
               <div className="col-lg-3">
                 <Field
                   name="id_mekanik"
@@ -197,6 +198,18 @@ class ModalBookingService extends Component {
                   placeholder="Masukan ID Mekanik"
                   validate={required}
                   loading={this.props.listsales === [] ? true : false}
+                />
+              </div>
+              <div className="col-lg-3">
+                <Field 
+                name="no_polisi"
+                component={ReanderSelect}
+                options={this.state.listcustomer}
+                type="text"
+                label="Nomor Polisi"
+                placeholder="Masukan Nomor Polisi"
+                validate={required}
+                loading={this.props.listcustomer === [] ? true : false}
                 />
               </div>
               <div className="col-lg-12">

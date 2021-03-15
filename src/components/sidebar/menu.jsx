@@ -20,7 +20,7 @@ const Menu = [
             path: "master-kendaraan",
             title: "Kendaraan",
           },
-          { path: "master-merk-barang", title: "Barang" },
+          // { path: "master-merk-barang", title: "Barang" },
         ],
       },
       {
@@ -33,8 +33,8 @@ const Menu = [
         ],
       },
       { path: "master-satuan", title: "Satuan" },
-      { path: "master-kualitas", title: "Kualitas" },
-      { path: "master-ukuran", title: "Ukuran" },
+      // { path: "master-kualitas", title: "Kualitas" },
+      // { path: "master-ukuran", title: "Ukuran" },
       { path: "master-warna", title: "Warna" },
       {
         path: "#",
@@ -73,6 +73,7 @@ const Menu = [
       { path: "stocking-konversi", title: "Konversi Barang" },
       { path: "stocking-hancur", title: "Hancur Barang" },
       { path: "stocking-tambah", title: "Tambah Stock Barang" },
+      { path: "stocking-returbarang", title: "Retur Barang"},
       // { path: "stocking-kunci", title: "Kunci Barang" },
     ],
   },

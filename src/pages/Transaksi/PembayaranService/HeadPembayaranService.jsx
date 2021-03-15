@@ -29,12 +29,16 @@ class HeadPembayaranService extends Component {
       step1: "row",
       step2: "row d-none",
       hasil: [],
+      tgl_keluar: "",
     };
   }
 
   componentDidMount() {
     this.props.change("tanggal", getToday());
+    this.props.change("tanggal_keluar", getToday());
+    this.props.change("tanggal_service_selanjutnya", getToday());
   }
+
   handleChange(nama, data) {
     let split = data || "DEFAULT|DEFAULT";
     let hasil = split.split("|");
@@ -75,17 +79,17 @@ class HeadPembayaranService extends Component {
         >
           <div className="col-lg-12">
             <div className="row">
-              <div className="col-lg-4">
+              <div className="col-lg-3">
                 <Field
                   name="tanggal"
-                  label="Tanggal"
+                  label="Tanggal Hari Ini"
                   type="text"
                   component={ReanderField}
                   readOnly
                 />
               </div>
 
-              <div className="col-lg-4">
+              <div className="col-lg-3">
                 <Field
                   name="pencarian"
                   label="Pencarian"
@@ -100,6 +104,40 @@ class HeadPembayaranService extends Component {
                   })}
                   placeholder="Silahkan Pilih"
                   onChange={(e) => this.setCustomer(e)}
+                />
+              </div>
+              <div className="col-lg-3">
+              <Field
+                  name="tanggal_keluar"
+                  label="Tanggal Service Keluar"
+                  type="date"
+                  component={ReanderField}
+                />
+              </div>
+              <div className="col-lg-3">
+              <Field
+                  name="km_keluar"
+                  label="KM Keluar"
+                  placeholder="Masukkan KM Keluar"
+                  type="text"
+                  component={ReanderField}
+                />
+              </div>
+              <div className="col-lg-3">
+              <Field
+                  name="tanggal_service_selanjutnya"
+                  label="Tanggal Service Selanjutnya"
+                  type="date"
+                  component={ReanderField}
+                />
+              </div>
+              <div className="col-lg-3">
+              <Field
+                  name="km_service_berikutnya"
+                  label="KM Service Berikutnya"
+                  type="text"
+                  component={ReanderField}
+                  placeholder="Masukkan KM Service berikutnya"
                 />
               </div>
               {/* <div className="col-lg-4">

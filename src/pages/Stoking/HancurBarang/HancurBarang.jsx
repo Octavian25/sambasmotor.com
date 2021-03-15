@@ -252,7 +252,7 @@ class HancurBarang extends React.Component {
       <div>
         <ol className="breadcrumb float-xl-right">
           <li className="breadcrumb-item">
-            <Link to="#">Data Master</Link>
+            <Link to="#">Stocking</Link>
           </li>
           <li className="breadcrumb-item active">Hancur Barang</li>
         </ol>

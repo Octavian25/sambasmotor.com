@@ -15,7 +15,6 @@ export function AxiosMasterGet(endpoint) {
         if (err.response) {
           if (err.response.status === 402) {
             localStorage.setItem("islogin", false);
-
             window.location.reload();
           } else {
             reject(err);
@@ -24,6 +23,7 @@ export function AxiosMasterGet(endpoint) {
       });
   });
 }
+
 export function AxiosMasterPost(endpoint, data) {
   let config = {
     headers: { "x-auth-token": localStorage.getItem("token") },

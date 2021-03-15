@@ -49,7 +49,6 @@ const hapusDataKategori = (params, dispatch) => {
   }).then((result) => {
     if (result.isConfirmed) {
       AxiosMasterDelete(
-        this.props.dispatch,
         "divisi/delete/by-kode-divisi/" + params
       )
         .then(() => dispatch(hideModal()))
@@ -144,7 +143,6 @@ class MasterDivisi extends React.Component {
     };
     this.state.isEdit
       ? AxiosMasterPut(
-          this.props.dispatch,
           "divisi/update/by-kode-divisi/" + hasil.kode_divisi || "-",
           {
             nama_divisi: hasil.nama_divisi || "-",
@@ -157,6 +155,7 @@ class MasterDivisi extends React.Component {
           .catch((err) =>
             NotifError(
               "Sepertinya ada gangguan, Mohon ulang beberapa saat lagi"
+              
             )
           )
       : AxiosMasterPost("divisi/add", data)

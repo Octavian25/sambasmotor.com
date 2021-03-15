@@ -9,6 +9,7 @@ import {
 import HeadLaporanPenjualanSales from "./HeadLaporanPenjualanSales";
 import CetakPenjualanSales from "./CetakPenjualanSales";
 import { ToastError } from "../../../../components/notification/notification";
+import TabelLaporanPenjualanSales from "./TabelLaporanPenjualanSales"
 
 class LaporanPenjualanSales extends Component {
   constructor(props) {
@@ -59,6 +60,11 @@ class LaporanPenjualanSales extends Component {
             <HeadLaporanPenjualanSales
               onSubmit={(data) => this.getLaporan(data)}
             />
+          </PanelBody>
+        </Panel>
+        <Panel>
+          <PanelBody>
+            <TabelLaporanPenjualanSales/>
           </PanelBody>
         </Panel>
       </div>

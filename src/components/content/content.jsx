@@ -18,7 +18,7 @@ function setTitle(path, routeArray) {
 class Content extends React.Component {
   componentDidMount() {
     setTitle(this.props.history.location.pathname, routes);
-    // console.log(this.checkAcces());
+    console.log(this.checkAcces());
   }
   componentWillMount() {
     this.props.history.listen(() => {
