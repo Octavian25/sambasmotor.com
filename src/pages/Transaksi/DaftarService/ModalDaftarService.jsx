@@ -32,6 +32,8 @@ class ModalDaftarService extends Component {
       member: false,
       reguler: false,
       listCustomer: [],
+      listkendaraan: [],
+      listNopol: [],
       customer: "col-lg-12 row",
       step: 0,
       step1: "row",
@@ -221,6 +223,7 @@ class ModalDaftarService extends Component {
           this.props.change("booking_customer", String(res.data.kode_customer));
           this.props.change("booking_nopol", res.data.nopol_kendaraan);
           this.props.change("kode_mekanik", res.data.kode_pegawai);
+          this.props.change("kode_kepala_montir", res.data.kode_pegawai);
           this.setState({
             customer: "col-lg-12 row d-none",
           });
@@ -240,12 +243,34 @@ class ModalDaftarService extends Component {
     this.props.change("alamat", hasil[1]);
     this.props.change("kota", hasil[2]);
     this.props.change("handphone", hasil[3]);
-    this.props.change("nopol_kendaraan", hasil[4]);
-    this.props.change("merk_kendaraan", hasil[5]);
-    this.props.change("type_kendaraan", hasil[6]);
-    this.props.change("warna_kendaraan", hasil[7]);
-    this.props.change("nomesin_kendaraan", hasil[8]);
+    this.getNopol(hasil[4]);
+    // this.props.getNopol("nopol_kendaraan",hasil[4]);
+    // this.props.change("merk_kendaraan", hasil[5]);
+    // this.props.change("type_kendaraan", hasil[6]);
+    // this.props.change("warna_kendaraan", hasil[7]);
+    // this.props.change("nomesin_kendaraan", hasil[8]);
   }
+  getNopol(data){
+    let listNopol =   this.props.listCustomer.filter((list) => list.kode_customer === data)
+     let final =  listNopol[0].nopol_kendaraan.map((hasil) => {
+      let data = {
+        value : hasil.nopol_kendaraan,
+        name : hasil.nopol_kendaraan
+      }
+      return data
+    })
+    this.setState({
+      listNopol : final
+    })
+    }
+  setKendaraan(data){
+    let hasil = data.split("||");
+    this.props.change("merk_kendaraan", hasil[2]);
+    this.props.change("type_kendaraan", hasil[3]);
+    this.props.change("warna_kendaraan", hasil[4]);
+    this.props.change("nomesin_kendaraan", hasil[5]);
+  }
+
   getMember() {
     this.setState({
       member: true,
@@ -264,7 +289,9 @@ class ModalDaftarService extends Component {
               };
               return data;
             }),
+            
         })
+        
       )
       .catch(() => ToastError("Error Get Member"));
   }
@@ -285,9 +312,20 @@ class ModalDaftarService extends Component {
             };
             return data;
           }),
-      })
+          listkendaraan:
+          res && res.data.map((item)=>{
+            let data2 = {
+              value : item.nopol_kendaraan,
+              name : item.nopol_kendaraan
+            };
+            console.log("KODE",item.kode_customer);
+            return data2;
+          })
+      }
+      )
     );
   }
+
   render() {
     return (
       <div>
@@ -339,7 +377,7 @@ class ModalDaftarService extends Component {
                 <Field
                   name="booking_customer"
                   component={ReanderSelect}
-                  options={this.props.listcustomer.map((list) => {
+                  options={this.props.listCustomer.map((list) => {
                     let data = {
                       value: list.kode_customer,
                       name: list.nama_customer,
@@ -408,7 +446,11 @@ class ModalDaftarService extends Component {
                     type="text"
                     label="Nama"
                     placeholder="Masukan Nama"
-                    onChange={(e) => this.setCustomer(e)}
+                    onChange={
+                      (e) => this.setCustomer(e)
+                    }
+                    
+                      
                   />
                 </div>
                 <div className="col-lg-3">
@@ -418,19 +460,19 @@ class ModalDaftarService extends Component {
                     type="text"
                     label="Nomor Polisi"
                     placeholder="Masukan Nomor Polisi"
-                    options=
-                    {
-                      this.state.listCustomer
-                      .filter((fill) => fill.kode_customer === this.state.listCustomer)
-                      .map((list)=>{
-                        let data = {
-                          value: `${list.nopol_kendaraan}`,
-                          name: `${list.nopol_kendaraan}`
-                        };
-                        return data;
-                      })}
+                    options={this.state.listNopol}
+                    // options={this.state.listCustomer.map((list)=>{
+                    //   let data={
+                    //     value:JSON.stringify(list.nopol_kendaraan),
+                    //     name:list.nopol_kendaraan
+                    //   };
+                    //   console.log("iki ganteng", list)
+                    //   return data
+                    // })}
+                    onChange={(e) => this.setKendaraan(e)}
                   />
                 </div>
+                {console.log(this.state.listNopol)}
                 <div className="col-lg-3">
                   <Field
                     name="alamat"
@@ -542,7 +584,24 @@ class ModalDaftarService extends Component {
                   placeholder="Masukan Keluhan Konsumen"
                 />
               </div>
-
+              <div className="col-lg-3">
+                <Field
+                  name="kode_kepala_montir"
+                  component={ReanderSelect}
+                  options={this.props.listsales
+                    .filter((fill) => fill.kode_divisi === "KPLMNTR")
+                    .map((list) => {
+                      let data = {
+                        value: `${list.kode_pegawai}`,
+                        name: `${list.kode_pegawai} - ${list.nama_pegawai}`,
+                      };
+                      return data;
+                    })}
+                  type="text"
+                  label="ID Kepala Montir"
+                  placeholder="Masukan ID Mekanik"
+                />
+              </div>
               <div className="col-lg-3">
                 <Field
                   name="kode_mekanik"
@@ -558,24 +617,6 @@ class ModalDaftarService extends Component {
                     })}
                   type="text"
                   label="ID Mekanik"
-                  placeholder="Masukan ID Mekanik"
-                />
-              </div>
-              <div className="col-lg-3">
-                <Field
-                  name="kode_kepala_montir"
-                  component={ReanderSelect}
-                  options={this.props.listsales
-                    .filter((fill) => fill.kode_divisi === "KPLMNTR")
-                    .map((list) => {
-                      let data = {
-                        value: `${list.kode_pegawai}`,
-                        name: `${list.kode_pegawai} - ${list.nama_pegawai}`,
-                      };
-                      return data;
-                    })}
-                  type="text"
-                  label="Penanggung Jawab Mekanik"
                   placeholder="Masukan ID Mekanik"
                 />
               </div>
@@ -625,7 +666,7 @@ ModalDaftarService = reduxForm({
 })(ModalDaftarService);
 export default connect((state) => {
   return {
-    listcustomer: state.datamaster.listcustomer,
+    listCustomer: state.datamaster.listcustomer,
     listkendaraan: state.datamaster.listkendaraan,
     listwarna: state.datamaster.listwarna,
     listdaftarservice: state.transaksi.listdaftarservice,

@@ -39,6 +39,7 @@ import {
   GET_KUNCI,
   GET_KWALITAS,
   GET_MERK_BARANG,
+  GET_NOPOL_CUSTOMER,
   GET_PARAMETER,
   GET_RAK,
   GET_SALES,
@@ -95,6 +96,7 @@ const initialState = {
   idbarang: false,
   datacustomer: false,
   listcustomer: [],
+  listNopol: [],
   datasupplier: false,
   listsupplier: [],
   datawarna: false,
@@ -345,6 +347,11 @@ const datamaster = (state = initialState, actions) => {
         ...state,
         listcustomer: actions.payload.data,
       };
+    case GET_NOPOL_CUSTOMER:
+      return {
+        ...state,
+        listNopol: actions.payload.data
+      }
     // Supplier
     case EDIT_SUPPLIER:
       return {

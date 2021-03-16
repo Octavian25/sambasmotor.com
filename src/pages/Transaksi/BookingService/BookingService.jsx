@@ -60,13 +60,14 @@ class BookingService extends React.Component {
       // KOLAH
       no_booking: Math.floor(Math.random() * 100000000).toString(),
       tgl_booking: getToday(),
-      nopol_kendaraan: hasil.nopol_kendaraan,
+      nopol_kendaraan: hasil.no_polisi,
       jenis_service: hasil.kategori_service,
       tgl_layanan: hasil.tanggal,
       jam: hasil.jam,
-      kode_pegawai: hasil.id_mekanik,
+      kode_pegawai: [hasil.id_kepala_montir, hasil.id_mekanik,hasil.id_helper],
       catatan: hasil.catatan,
     };
+    console.log(hasil);
     // console.log(data);
     // return false;
     AxiosMasterPost("service/booking/post-transaksi", data)

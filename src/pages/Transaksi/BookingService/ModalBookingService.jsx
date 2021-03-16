@@ -9,6 +9,7 @@ import {
 import {
   getCustomer,
   getKategoriService,
+  getNopolCustomer,
   getSales,
 } from "../../../actions/datamaster_action";
 import { required } from "../../../validasi/normalize";
@@ -22,6 +23,8 @@ class ModalBookingService extends Component {
       member: false,
       reguler: false,
       listCustomer: [],
+      listkendaraan: [],
+      listNopol: []
     };
   }
   handleChange(nama, data) {
@@ -70,13 +73,27 @@ class ModalBookingService extends Component {
           res &&
           res.data.map((list) => {
             let data = {
-              value: `${list.nama_customer}||${list.alamat}||${list.handphone}||${list.nopol_kendaraan}`,
+              value: `${list.nama_customer}||${list.alamat}||${list.handphone}||${list.kode_customer}`,
               name: list.nama_customer,
             };
+            console.log(data)
             return data;
           }),
       })
     );
+  }
+  getNopol(data){
+  let listNopol =   this.props.listCustomer.filter((list) => list.kode_customer === data)
+   let final =  listNopol[0].nopol_kendaraan.map((hasil) => {
+    let data = {
+      value : hasil.nopol_kendaraan,
+      name : hasil.nopol_kendaraan
+    }
+    return data
+  })
+  this.setState({
+    listNopol : final
+  })
   }
   render() {
     return (
@@ -124,7 +141,7 @@ class ModalBookingService extends Component {
                   component={ReanderSelect}
                   options={this.state.listCustomer}
                   onChange={(data) =>
-                    this.props.change("nopol_kendaraan", data.split("||")[3])
+                  this.getNopol(data.split("||")[3])
                   }
                   type="text"
                   label="Nama customer"
@@ -134,13 +151,14 @@ class ModalBookingService extends Component {
                 />
               </div>
               <div className="col-lg-3 d-none">
-                <Field
+                {/* <Field
                   name="nopol_kendaraan"
                   component={ReanderField}
                   type="text"
                   label="nopol"
                   placeholder="Masukan nopol"
-                />
+                  options=""
+                /> */}
               </div>
               <div className="col-lg-2">
                 <Field
@@ -179,9 +197,28 @@ class ModalBookingService extends Component {
                   placeholder="Masukan Jam"
                 />
               </div>
-              <div className="col-lg-2"></div>
-              <div className="col-lg-3">
-                <Field
+              <div className="col-lg-3 mt-2">
+                <Field  
+                  name="id_kepala_montir"
+                  component={ReanderSelect}
+                  options={this.props.listsales
+                    .filter((list) => list.kode_divisi === "KPLMNTR")
+                    .map((list) => {
+                      let data = {
+                        value: list.kode_pegawai,
+                        name: list.nama_pegawai,
+                      };
+                      return data;
+                    })}
+                  type="text"
+                  label="ID Kepala Montir"
+                  placeholder="Masukan ID Kepala Montir"
+                  validate={required}
+                  loading={this.props.listsales === [] ? true : false}
+                />
+              </div>
+              <div className="col-lg-3 mt-2">
+                <Field  
                   name="id_mekanik"
                   component={ReanderSelect}
                   options={this.props.listsales
@@ -200,11 +237,32 @@ class ModalBookingService extends Component {
                   loading={this.props.listsales === [] ? true : false}
                 />
               </div>
-              <div className="col-lg-3">
+              <div className="col-lg-3 mt-2">
+                <Field  
+                  name="id_helper"
+                  component={ReanderSelect}
+                  options={this.props.listsales
+                    .filter((list) => list.kode_divisi === "HP")
+                    .map((list) => {
+                      let data = {
+                        value: list.kode_pegawai,
+                        name: list.nama_pegawai,
+                      };
+                      return data;
+                    })}
+                  type="text"
+                  label="ID Helper"
+                  placeholder="Masukan ID Helper"
+                  validate={required}
+                  loading={this.props.listsales === [] ? true : false}
+                />
+              </div>
+              {/* {console.log(this.state.listNopol)} */}
+              <div className="col-lg-3 mt-2">
                 <Field 
                 name="no_polisi"
                 component={ReanderSelect}
-                options={this.state.listcustomer}
+                options={this.state.listNopol}
                 type="text"
                 label="Nomor Polisi"
                 placeholder="Masukan Nomor Polisi"
@@ -257,7 +315,9 @@ export default connect((state) => {
   return {
     listCustomer: state.datamaster.listcustomer,
     listkategoriservice: state.datamaster.listkategoriservice,
+    listkendaraan: state.datamaster.listkendaraan,
     listsales: state.datamaster.listsales,
+    listNopol: state.datamaster.listNopol,
     onSend: state.datamaster.onSend,
   };
 })(ModalBookingService);

@@ -37,6 +37,11 @@ class HeadPembayaranService extends Component {
     this.props.change("tanggal", getToday());
     this.props.change("tanggal_keluar", getToday());
     this.props.change("tanggal_service_selanjutnya", getToday());
+    this.props.change("km_service_berikutnya", 5000);
+  }
+
+  handleChangeKMSelanjutnya(){
+    
   }
 
   handleChange(nama, data) {
@@ -138,6 +143,7 @@ class HeadPembayaranService extends Component {
                   type="text"
                   component={ReanderField}
                   placeholder="Masukkan KM Service berikutnya"
+                  value={this.props.kmkeluar}
                 />
               </div>
               {/* <div className="col-lg-4">

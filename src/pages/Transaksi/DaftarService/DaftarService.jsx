@@ -68,7 +68,7 @@ class BookingService extends React.Component {
       jdw_service: hasil.service_selanjutnya,
       km_service: hasil.km_service_berikutnya,
       keluhan: hasil.keluhan_konsumen,
-      id_mekanik: hasil.kode_mekanik,
+      id_mekanik: [hasil.kode_kepala_montir, hasil.kode_mekanik, hasil.kode_helper],
       status_booking: hasil.booking === undefined ? false : true,
       detail_barang: JSON.parse(
         localStorage.getItem("list_service_daftar_temp")

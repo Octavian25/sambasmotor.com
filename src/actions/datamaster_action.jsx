@@ -55,6 +55,7 @@ export const GET_WARNA = "GET_WARNA";
 export const EDIT_UKURAN = "EDIT_UKURAN";
 export const GET_UKURAN = "GET_UKURAN";
 export const GET_DISKON = "GET_DISKON";
+export const GET_NOPOL_CUSTOMER = "GET_NOPOL_CUSTOMER"
 
 // Modal
 export const hideModal = () => {
@@ -569,6 +570,18 @@ export const getCustomer = (data) => {
         type: GET_CUSTOMER,
         payload: {
           data: res.data,
+        },
+      })
+    );
+  };
+};
+export const getNopolCustomer = (data) => {
+  return (dispatch) => {
+    AxiosMasterGet("customer/get/all").then((res) =>
+      dispatch({
+        type: GET_NOPOL_CUSTOMER,
+        payload: {
+          data: res.data.nopol_kendaraan,
         },
       })
     );

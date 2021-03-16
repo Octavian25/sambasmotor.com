@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Field, reduxForm } from "redux-form";
+import { Field, hasSubmitFailed, reduxForm } from "redux-form";
 import { AxiosMasterGet } from "../../../axios";
 import {
   NotifError,
@@ -19,7 +19,7 @@ const maptostate = (state) => {
         alamat_customer: state.datamaster.datacustomer.alamat,
         kota_customer: state.datamaster.datacustomer.kota,
         handphone_customer: state.datamaster.datacustomer.handphone,
-        no_polisi: state.datamaster.datacustomer.nopol_kendaraan,
+        no_polisi: JSON.stringify(state.datamaster.datacustomer.nopol_kendaraan),
         merk: state.datamaster.datacustomer.merk_kendaraan,
         type: state.datamaster.datacustomer.type_kendaraan,
         no_mesin: state.datamaster.datacustomer.nomesin_kendaraan,
@@ -39,6 +39,7 @@ class FormModalCustomer extends Component {
     super(props);
     this.state = {
       listMerk: [],
+      listCustomer: [],
     };
   }
 
@@ -107,11 +108,19 @@ class FormModalCustomer extends Component {
             <h3 className="mb-3">Data Kendaraan :</h3>
             <Field
               name="no_polisi"
-              component={ReanderField}
+              component={ReanderSelect}
               type="text"
               label="Nomor Polisi"
               placeholder="Masukan Nomor Polisi"
               validate={required}
+              options={this.state.listCustomer.map((list) => {
+                let data = {
+                  value: list.nopol_kendaraan[0],
+                  name: list.nopol_kendaraan[0].nopol_kendaraan
+                };
+                console.log(list)
+                return data;
+              })}
             />
             <Field
               name="merk"

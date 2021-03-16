@@ -58,18 +58,6 @@ class MasterCustomer extends React.Component {
           text: "Handphone",
         },
         {
-          dataField: "nopol_kendaraan",
-          text: "Nomor Polisi",
-        },
-        {
-          dataField: "merk_kendaraan",
-          text: "Merk",
-        },
-        {
-          dataField: "warna_kendaraan",
-          text: "Warna",
-        },
-        {
           dataField: "action",
           text: "Action",
           csvExport: false,
