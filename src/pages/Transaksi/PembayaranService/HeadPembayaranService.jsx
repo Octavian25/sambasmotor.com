@@ -30,6 +30,7 @@ class HeadPembayaranService extends Component {
       step2: "row d-none",
       hasil: [],
       tgl_keluar: "",
+      km_keluar: ""
     };
   }
 
@@ -37,11 +38,7 @@ class HeadPembayaranService extends Component {
     this.props.change("tanggal", getToday());
     this.props.change("tanggal_keluar", getToday());
     this.props.change("tanggal_service_selanjutnya", getToday());
-    this.props.change("km_service_berikutnya", 5000);
-  }
-
-  handleChangeKMSelanjutnya(){
-    
+    this.props.change("km_service_berikutnya", this.state.km_keluar);
   }
 
   handleChange(nama, data) {
@@ -73,6 +70,14 @@ class HeadPembayaranService extends Component {
     this.props.dispatch(getListBarangPembayaran());
   }
 
+  setKMBerikutnya(e){
+    // this.setState({
+    //   km_keluar: this.state.km_keluar + parseInt(e.target.value)
+    // }  
+    // )
+    // localStorage.setItem("km_selanjutnya", e.target.value);
+    
+  }
   render() {
     return (
       <div>
@@ -126,7 +131,10 @@ class HeadPembayaranService extends Component {
                   placeholder="Masukkan KM Keluar"
                   type="text"
                   component={ReanderField}
+                  // onChange={() => this.props.change("km_service_berikutnya",this.props.km_service_berikutnya)}
+                  onBlur={() => this.props.change("km_service_berikutnya",this.props.km_service_berikutnya)}
                 />
+                {console.log("cobs",this.state.km_keluar)}
               </div>
               <div className="col-lg-3">
               <Field
@@ -143,7 +151,6 @@ class HeadPembayaranService extends Component {
                   type="text"
                   component={ReanderField}
                   placeholder="Masukkan KM Service berikutnya"
-                  value={this.props.kmkeluar}
                 />
               </div>
               {/* <div className="col-lg-4">
@@ -342,6 +349,7 @@ export default connect((state) => {
     listbayar_service: state.transaksi.listbayar_service,
     kriteria: selector(state, "kriteria"),
     pencarian: selector(state, "pencarian"),
+    km_service_berikutnya : parseFloat(selector(state, "km_keluar") || 0) + 5000,
     listbarangpembayaran: state.transaksi.listbarangpembayaran,
   };
 })(HeadPembayaranService);

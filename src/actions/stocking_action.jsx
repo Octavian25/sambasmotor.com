@@ -98,6 +98,27 @@ export const getPengeluaranBarang = (kode) => {
       .catch((err) => console.log(err));
   };
 };
+
+// export const getReturBarang = (kode) => {
+//   return (dispatch) => {
+//     AxiosMasterGet("daftar-service/get/getDataServiceAllActive/" + kode)
+//       .then((res) => {
+//         let data = res.data;
+//         let arrayBaru = [];
+//         for (let i = 0; i < data.length; i++) {
+//           arrayBaru.push(data[i].detail);
+//         }
+//         localStorage.setItem("retur_barang", JSON.stringify(arrayBaru));
+//         dispatch({
+//           type: GET_RETUR_BARANG_TIDAK_JADI_JUAL_TEMP,
+//           payload: {
+//             data: JSON.parse(localStorage.getItem("pengeluaran_barang")) || [],
+//           },
+//         });
+//       })
+//       .catch((err) => console.log(err));
+//   };
+// };
 export const getPengeluaranBarangSelected = () => {
   let data = JSON.parse(localStorage.getItem("FakturTerpilih_detail")) || [];
   return (dispatch) => {

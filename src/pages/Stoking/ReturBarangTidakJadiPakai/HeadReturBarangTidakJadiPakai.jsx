@@ -10,8 +10,8 @@ import {
 } from "../../../components/notification/notification";
 import Skeleton from "react-loading-skeleton";
 import Swal from "sweetalert2";
-import { getReturBarangTidakJadi } from "../../../actions/stocking_action";
-import { AxiosMasterGet } from "../../../axios";
+import { getPermintaanTemp } from "../../../actions/stocking_action";
+import { AxiosMasterDelete, AxiosMasterGet, AxiosMasterPost } from "../../../axios";
 import Tabel from "../../../components/Tabel/tabel";
 import { getToday } from "../../../components/notification/function";
 import { required } from "../../../validasi/normalize";
@@ -19,13 +19,13 @@ import { required } from "../../../validasi/normalize";
 const maptostate = (state) => {
   return {
     initialValues: {
-      no_retur: localStorage.getItem("kode_retur_barang") || "",
+      no_retur: localStorage.getItem("kode_permintaan_barang") || "",
     },
     onSend: state.datamaster.onSend,
     listsales: state.datamaster.listsales,
   };
 };
-class HeadReturBarangTidakJadiPakai extends Component {
+class HeadReturBarangTidakJadi extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -34,6 +34,7 @@ class HeadReturBarangTidakJadiPakai extends Component {
       listSupplier: [],
       listSPK: [],
       columns: [
+
         {
           dataField: "kode_barcode",
           text: "Kode barcode",
@@ -43,19 +44,6 @@ class HeadReturBarangTidakJadiPakai extends Component {
           dataField: "nama_barang",
           text: "Nama Barang",
         },
-        {
-          dataField: "merk_barang",
-          text: "Merk",
-        },
-        {
-          dataField: "kwalitas",
-          text: "Kualitas",
-        },
-        {
-          dataField: "ukuran",
-          text: "Ukuran",
-        },
-
         {
           dataField: "qty",
           text: "Qty",
@@ -74,9 +62,9 @@ class HeadReturBarangTidakJadiPakai extends Component {
                   <button
                     type="button"
                     onClick={() => this.deleteBarang(row)}
-                    className="btn btn-danger"
+                    className="btn btn-info"
                   >
-                    Hapus
+                    Retur
                     <i className="fa fa-trash ml-2"></i>
                   </button>
                 </div>
@@ -87,6 +75,7 @@ class HeadReturBarangTidakJadiPakai extends Component {
       ],
     };
   }
+  
   deleteBarang(row) {
     Swal.fire({
       title: "Anda Yakin !!",
@@ -99,9 +88,9 @@ class HeadReturBarangTidakJadiPakai extends Component {
       showConfirmButton: true,
     }).then((result) => {
       if (result.isConfirmed) {
-        deleteLocalItemBarcode("ReturBarang_temp", row.kode_barcode);
+        deleteLocalItemBarcode("PermintaanBarang_temp", row.kode_barcode);
         // deleteLocalItemBarcode("PermintaanBarang_temp", row.kode_barcode);
-        this.props.dispatch(getReturBarangTidakJadi());
+        this.props.dispatch(getPermintaanTemp());
       }
     });
   }
@@ -121,6 +110,7 @@ class HeadReturBarangTidakJadiPakai extends Component {
         ToastError(`Erorr Get SPK , Detail : ${err.response.data}`)
       );
   }
+
   getSPK(data) {
     let PermintaanBarang_temp_kirim = [];
     let filtered = this.state.listSPK.filter((list) => list.no_daftar === data);
@@ -134,16 +124,32 @@ class HeadReturBarangTidakJadiPakai extends Component {
       });
     });
     localStorage.setItem(
-      "ReturBarang_temp",
+      "PermintaanBarang_temp",
       JSON.stringify(filtered[0].detail_barang)
     );
     localStorage.setItem(
-      "ReturBarang_temp_kirim",
+      "PermintaanBarang_temp_kirim",
       JSON.stringify(PermintaanBarang_temp_kirim)
     );
-    this.props.dispatch(getReturBarangTidakJadi());
+    this.props.dispatch(getPermintaanTemp());
+  }
+  onSelectRow(row, isSelected, data) {
+    if (isSelected) {
+      let kondisi=data
+      console.log("testing",kondisi);
+    }
   }
   render() {
+    
+    const selectRowProp = {
+      mode: 'checkbox',
+      clickToSelect: true,
+      unselectable: [],
+      selected: [],
+      onSelect: this.onSelectRow,
+      bgColor: 'gold'
+    };
+    
     return (
       <form onSubmit={this.props.handleSubmit} autoComplete={true}>
         <div className="col-lg-12">
@@ -222,19 +228,20 @@ class HeadReturBarangTidakJadiPakai extends Component {
           </div>
         </div>
         <div className="col-lg-12">
-          {/* {this.props.returbarang ? ( */}
+          {this.props.permintaan_temp ? (
             <div className="col-lg-12">
               <Tabel
-                keyField="kode"
-                data={this.props.retur_temp || []}
+                keyField="kode_barcode"
+                data={this.props.permintaan_temp || []}
                 columns={this.state.columns}
+                selectRow={selectRowProp}
                 CSVExport
                 textEmpty="Silahkan Pilih Nomor Daftar Service untuk melihat barang"
               />
             </div>
-        {/* //   ) : (
-        //     <Skeleton width={"100%"} height={400} />
-        //   )} */}
+          ) : (
+            <Skeleton width={"100%"} height={400} />
+          )}
         </div>
         <div className="col-lg-12 mb-5 mt-3">
           <div className="text-right">
@@ -256,8 +263,8 @@ class HeadReturBarangTidakJadiPakai extends Component {
     );
   }
 }
-HeadReturBarangTidakJadiPakai = reduxForm({
-  form: "returbarang",
+HeadReturBarangTidakJadi = reduxForm({
+  form: "permintaanBarang",
   enableReinitialize: true,
-})(HeadReturBarangTidakJadiPakai);
-export default connect(maptostate, null)(HeadReturBarangTidakJadiPakai);
+})(HeadReturBarangTidakJadi);
+export default connect(maptostate, null)(HeadReturBarangTidakJadi);

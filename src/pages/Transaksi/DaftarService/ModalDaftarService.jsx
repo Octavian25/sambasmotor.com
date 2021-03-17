@@ -243,7 +243,7 @@ class ModalDaftarService extends Component {
     this.props.change("alamat", hasil[1]);
     this.props.change("kota", hasil[2]);
     this.props.change("handphone", hasil[3]);
-    this.getNopol(hasil[4]);
+    this.getNopol(hasil[0]);
     // this.props.getNopol("nopol_kendaraan",hasil[4]);
     // this.props.change("merk_kendaraan", hasil[5]);
     // this.props.change("type_kendaraan", hasil[6]);
@@ -312,20 +312,38 @@ class ModalDaftarService extends Component {
             };
             return data;
           }),
-          listkendaraan:
-          res && res.data.map((item)=>{
-            let data2 = {
-              value : item.nopol_kendaraan,
-              name : item.nopol_kendaraan
-            };
-            console.log("KODE",item.kode_customer);
-            return data2;
-          })
       }
       )
     );
   }
 
+  getKendaraanCustomer(e) {
+    this.setState({
+      member: false,
+      reguler: true,
+    });
+    AxiosMasterGet("kendaraan-customer/get/by-nopol/" + e)
+    .then((res) =>
+      // this.setState({
+      //   listkendaraan:
+      //     res &&
+      //     res.data.map((list) => {
+      //       let data = {
+      //         value: `${list.nopol_kendaraan}||${list.nomesin_kendaraan}||${list.merk_kendaraan}||${list.warna_kendaraan}||${list.type_kendaraan}||${list.id_customer}`,
+      //         name: list.nama_customer,
+      //       };
+      //       console.log("data",data);
+      //       return data;
+      //     }),
+      // }
+      {
+        let data = res && res.data 
+        this.props.change("type_kendaraan", data[0].type_kendaraan)
+        this.props.change("nomesin_kendaraan", data[0].nomesin_kendaraan)
+      }
+      
+    );
+  }
   render() {
     return (
       <div>
@@ -469,7 +487,7 @@ class ModalDaftarService extends Component {
                     //   console.log("iki ganteng", list)
                     //   return data
                     // })}
-                    onChange={(e) => this.setKendaraan(e)}
+                    onChange={(e) => this.getKendaraanCustomer(e)}
                   />
                 </div>
                 {console.log(this.state.listNopol)}

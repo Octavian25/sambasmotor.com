@@ -23,6 +23,7 @@ import { reset } from "redux-form";
 import { AxiosMasterPost, AxiosMasterPut } from "../../../axios.js";
 import Tabel from "../../../components/Tabel/tabel.jsx";
 const FormModalCustomer = lazy(() => import("./FormModalCustomer.jsx"));
+const FormModalTambahKendaraan = lazy(()=> import ("./FormModalTambahKendaraan.jsx"));
 
 const maptostate = (state) => {
   return {
@@ -39,6 +40,7 @@ class MasterCustomer extends React.Component {
       isEdit: false,
       modalDialog: false,
       isLoading: false,
+      JenisModal: "",
       columns: [
         {
           dataField: "nama_customer",
@@ -137,6 +139,7 @@ class MasterCustomer extends React.Component {
     this.props.dispatch(editCustomer(data));
     this.setState({
       isEdit: true,
+      JenisModal: "Edit Customer"
     });
   }
   tambahkendaraanmodal(tambah) {
@@ -144,6 +147,7 @@ class MasterCustomer extends React.Component {
     this.props.dispatch(editCustomer(tambah));
     this.setState({
       isEdit: true,
+      JenisModal: "Tambah Kendaraan"
     });
   }
   tambahModal() {
@@ -237,9 +241,10 @@ class MasterCustomer extends React.Component {
           </PanelBody>
           <ModalGlobal
             title={
-              this.state.isEdit ? "Edit Data Customer" : "Tambah Data Customer"
+              this.state.JenisModal === "Edit Customer" ? "Edit Data Customer" : this.state.JenisModal === "Tambah Kendaraan" ? "Tambah Data Kendaraan" : "Tambah Data Customer"
             }
             content={
+              this.state.JenisModal === "Edit Customer" ? (
               <Suspense
                 fallback={<Skeleton width={"100%"} height={50} count={2} />}
               >
@@ -250,8 +255,32 @@ class MasterCustomer extends React.Component {
                   noFaktur={this.props.noFaktur}
                 />
               </Suspense>
+              ) : this.state.JenisModal === "Tambah Kendaraan" ? (
+                <Suspense
+                fallback={<Skeleton width={"100%"} height={50} count={2} />}
+              >
+                <FormModalTambahKendaraan
+                  onSubmit={(data) => this.handleSubmit(data)}
+                  onSend={this.props.onSend}
+                  isEdit={this.state.isEdit}
+                  noFaktur={this.props.noFaktur}
+                />
+              </Suspense>
+              ) : (
+                <Suspense
+                fallback={<Skeleton width={"100%"} height={50} count={2} />}
+              >
+                <FormModalCustomer
+                  onSubmit={(data) => this.handleSubmit(data)}
+                  onSend={this.props.onSend}
+                  isEdit={this.state.isEdit}
+                  noFaktur={this.props.noFaktur}
+                />
+              </Suspense>
+              )
             }
           />
+               
 
           {/* End Tambah Master Kategori  */}
         </Panel>
